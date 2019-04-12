@@ -1,0 +1,73 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: etcd-admission-control
+  name: etcd-admission-control
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: etcd-admission-control
+  template:
+    metadata:
+      labels:
+        app: etcd-admission-control
+      name: etcd-admission-control
+    spec:
+      containers:
+        - name: etcd-admission-control
+          image: dreampuf/etcd-admission-control:latest
+          args:
+            - "-crt=/certs/tls.crt"
+            - "-key=/certs/tls.key"
+            - "-addr=0.0.0.0:8443"
+          ports:
+            - containerPort: 8443
+              name: webhook-api
+          volumeMounts:
+            - readOnly: true
+              mountPath: /certs
+              name: etcd-admission-key
+      volumes:
+        - name: etcd-admission-key
+          secret:
+            secretName: etcd-admission-key
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: etcd-admission-control
+spec:
+  selector:
+    app: etcd-admission-control
+  ports:
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: webhook-api
+
+---
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: etcd-webhook
+webhooks:
+- name: etcd-admission-control.default.svc
+  rules:
+  - apiGroups:
+    - ""
+    apiVersions:
+    - "*"
+    operations:
+    - DELETE
+    resources:
+    - "pods"
+  clientConfig:
+    service:
+      namespace: default
+      name: etcd-admission-control
+      path: "/"
+    caBundle: ${CA_PEM_B64}
