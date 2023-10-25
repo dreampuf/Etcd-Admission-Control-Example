@@ -14,7 +14,7 @@ require (
 	github.com/spf13/pflag v1.0.3 // indirect
 	golang.org/x/crypto v0.1.0 // indirect
 	golang.org/x/sync v0.1.0
-	google.golang.org/grpc v1.53.0 // indirect
+	google.golang.org/grpc v1.56.3 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	k8s.io/api v0.0.0-20190222213804-5cb15d344471
 	k8s.io/apimachinery v0.15.7
