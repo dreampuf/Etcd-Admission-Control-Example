@@ -12,7 +12,7 @@ require (
 	github.com/peterbourgon/diskv v2.0.1+incompatible // indirect
 	github.com/pkg/errors v0.9.1
 	github.com/spf13/pflag v1.0.3 // indirect
-	golang.org/x/crypto v0.1.0 // indirect
+	golang.org/x/crypto v0.17.0 // indirect
 	golang.org/x/sync v0.1.0
 	google.golang.org/grpc v1.56.3 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
