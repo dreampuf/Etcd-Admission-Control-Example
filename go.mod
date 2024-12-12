@@ -9,8 +9,8 @@ require (
 	github.com/gregjones/httpcache v0.0.0-20190212212710-3befbb6ad0cc // indirect
 	github.com/peterbourgon/diskv v2.0.1+incompatible // indirect
 	github.com/pkg/errors v0.9.1
-	golang.org/x/crypto v0.17.0 // indirect
-	golang.org/x/sync v0.1.0
+	golang.org/x/crypto v0.31.0 // indirect
+	golang.org/x/sync v0.10.0
 	google.golang.org/grpc v1.56.3 // indirect
 	k8s.io/api v0.0.0-20190222213804-5cb15d344471
 	k8s.io/apimachinery v0.16.13
